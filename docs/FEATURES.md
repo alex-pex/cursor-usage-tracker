@@ -133,7 +133,7 @@
 
 ### Billing Groups
 
-- Group management: create, rename, assign members
+- Group management: create, rename, assign members (Cursor role badge per member)
 - HiBob CSV import with change preview
 - Backup export/import
 
