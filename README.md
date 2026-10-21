@@ -440,7 +440,7 @@ When both are set, either match grants access. When neither is set, any account 
 
 ### Alternative providers
 
-Google is the default. Set `AUTH_PROVIDER` to `microsoft-entra-id`, `github`, `gitlab`, `okta`, `keycloak` or `auth0` to use another one. `AUTH_SECRET`, `AUTH_TRUST_HOST`, `AUTH_URL` and the allowlists above work the same way. Credentials follow the Auth.js naming `AUTH_<PROVIDER>_ID`, `AUTH_<PROVIDER>_SECRET` and, where needed, `AUTH_<PROVIDER>_ISSUER` (provider name upper-cased, dashes as underscores). The redirect URI is `https://your-domain.com/api/auth/callback/<provider>`.
+Google is selected by default. To sign in with another provider, set `AUTH_PROVIDER` to `microsoft-entra-id`, `github`, `gitlab`, `okta`, `keycloak` or `auth0`. Add that provider's client ID and secret as `AUTH_<PROVIDER>_ID` and `AUTH_<PROVIDER>_SECRET` (use uppercase letters and replace dashes with underscores). Some providers also require `AUTH_<PROVIDER>_ISSUER`. In your provider's settings, register `https://your-domain.com/api/auth/callback/<provider>` as the redirect URI. `AUTH_SECRET`, `AUTH_TRUST_HOST`, `AUTH_URL` and the access restrictions above work the same way.
 
 Example with Microsoft Entra ID:
 
@@ -450,8 +450,6 @@ AUTH_MICROSOFT_ENTRA_ID_ID=...
 AUTH_MICROSOFT_ENTRA_ID_SECRET=...
 AUTH_MICROSOFT_ENTRA_ID_ISSUER=https://login.microsoftonline.com/<tenant-id>/v2.0/  # required, limits sign-in to your tenant
 ```
-
-The signed-in email is the `email` claim, or the user principal name (`preferred_username`) when absent. Accounts whose provider reports an unverified email are rejected, and GitHub emails must be verified.
 
 ### How It Works
 

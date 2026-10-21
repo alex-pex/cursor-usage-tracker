@@ -6,7 +6,11 @@ import Google from "next-auth/providers/google";
 import Keycloak from "next-auth/providers/keycloak";
 import MicrosoftEntraID from "next-auth/providers/microsoft-entra-id";
 import Okta from "next-auth/providers/okta";
-import { profileEmail } from "@/lib/auth-email";
+
+export function profileEmail(profile?: { email?: unknown; preferred_username?: unknown } | null) {
+  const email = profile?.email ?? profile?.preferred_username;
+  return typeof email === "string" && email.includes("@") ? email.toLowerCase() : undefined;
+}
 
 const providers = {
   google: { provider: Google, name: "Google" },

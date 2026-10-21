@@ -1,5 +1,9 @@
-import { describe, expect, it } from "vitest";
-import { profileEmail } from "@/lib/auth-email";
+import { describe, expect, it, vi } from "vitest";
+import { profileEmail } from "@/auth";
+
+vi.mock("next-auth", () => ({
+  default: () => ({ handlers: {}, auth: () => {}, signIn: () => {}, signOut: () => {} }),
+}));
 
 describe("profileEmail", () => {
   it("prefers email and lowercases", () => {
