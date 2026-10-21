@@ -1,4 +1,4 @@
-import { getDb } from "@/lib/data";
+import { findMember } from "@/lib/data";
 import { isOwnerRole } from "@/lib/types";
 
 export function getViewer(email?: string | null) {
@@ -15,10 +15,7 @@ export function getViewer(email?: string | null) {
   let unrestricted = !!viewerEmail && !!unrestrictedEmails?.includes(viewerEmail);
   if (viewerEmail && !unrestricted) {
     try {
-      const row = getDb()
-        .prepare("SELECT role FROM members WHERE lower(email) = ? AND is_removed = 0")
-        .get(viewerEmail) as { role: string } | undefined;
-      unrestricted = isOwnerRole(row?.role);
+      unrestricted = isOwnerRole(findMember(viewerEmail)?.role);
     } catch {
       unrestricted = false;
     }

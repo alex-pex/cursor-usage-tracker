@@ -21,6 +21,7 @@ import type {
   AnalyticsPlansEntry,
 } from "../types";
 import { DEFAULT_CONFIG } from "../types";
+import { gravatarUrl } from "../gravatar";
 import type {
   UsageBadge,
   SpendBadge,
@@ -1298,7 +1299,11 @@ export function getFullDashboard(days: number = 7): FullDashboard {
     cycleEnd,
     cycleDays,
     dailyTeamActivity,
-    rankedUsers: assignBadges(rankedUsers, days).map((u, i) => ({ ...u, rank: i + 1 })),
+    rankedUsers: assignBadges(rankedUsers, days).map((u, i) => ({
+      ...u,
+      rank: i + 1,
+      avatar_url: gravatarUrl(u.email),
+    })),
   };
 
   return {
@@ -2332,6 +2337,12 @@ export function getModelEfficiency(emails?: string[]): ModelEfficiency[] {
     ORDER BY total_spend_usd DESC`,
     )
     .all(...params, ...params) as ModelEfficiency[];
+}
+
+export function findMember(email: string): { name: string; role: string } | undefined {
+  return getDb()
+    .prepare("SELECT name, role FROM members WHERE lower(email) = ? AND is_removed = 0")
+    .get(email.toLowerCase()) as { name: string; role: string } | undefined;
 }
 
 export function getAllMembers(): Array<TeamMember & { first_seen: string; last_seen: string }> {

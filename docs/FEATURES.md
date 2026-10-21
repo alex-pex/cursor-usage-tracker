@@ -31,7 +31,7 @@
 - Sortable by: spend, activity, requests, lines, $/req, context, name
 - Filterable by badge type via `Badges ▾` dropdown with collapsible sections and per-badge user counts
 - Active badge filter shown as chip with ✕ dismiss next to table header
-- Columns: rank, name, email, spend, requests, lines, $/req, model, profile badges, ranks
+- Columns: rank, name (with Gravatar avatar), email, spend, requests, lines, $/req, model, profile badges, ranks
 
 ### Badges (per user, all shown)
 
@@ -55,7 +55,7 @@
 
 ### Header
 
-- Name, email, role, billing group link
+- Gravatar avatar, name, email, role, billing group link
 - Profile badges (same as dashboard)
 
 ### KPI Cards
@@ -156,3 +156,13 @@
 - Everyone else (members, unknown emails, anonymous) loses the features listed in `RESTRICTED_FEATURES`
 - Values: `insights`, `anomalies`, `anomalies.actions` (no Ack/Resolve), `user-details` (other members' pages greyed out and blocked), `settings`, `settings.actions` (read-only Settings); `*.actions` covers every `.actions` value
 - A value also restricts its dotted sub-values; the Overview is never restricted
+
+---
+
+## Header Menu
+
+**Who is viewing, shown left of the plan badge when signed in or when `RESTRICTED_FEATURES` is set.**
+
+- Gravatar avatar and name (Cursor full name for a Cursor member, else the sign-in email); the tooltip shows the email
+- Menu: My stats (Cursor members only, opens their user page) and Sign out
+- Shows _Anonymous_ when nobody is signed in (auth off)
