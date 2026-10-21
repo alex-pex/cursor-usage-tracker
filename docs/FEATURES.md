@@ -136,3 +136,12 @@
 - Group management: create, rename, assign members
 - HiBob CSV import with change preview
 - Backup export/import
+
+## Authentication (optional, `AUTH_SECRET`)
+
+**Sign-in with the identity provider of your choice.**
+
+- `AUTH_PROVIDER` selects one provider per deployment: Google (default), Microsoft Entra ID, GitHub, GitLab, Okta, Keycloak, Auth0
+- Login page shows a single button for the selected provider
+- Email comes from the `email` claim, falling back to `preferred_username` (Entra UPN); unverified emails are rejected
+- `AUTH_ALLOWED_DOMAIN` / `AUTH_ALLOWED_EMAILS` apply to any provider
