@@ -21,6 +21,7 @@ import type {
   AnalyticsPlansEntry,
 } from "../types";
 import { DEFAULT_CONFIG } from "../types";
+import { gravatarUrl } from "../gravatar";
 import type {
   UsageBadge,
   SpendBadge,
@@ -1298,7 +1299,11 @@ export function getFullDashboard(days: number = 7): FullDashboard {
     cycleEnd,
     cycleDays,
     dailyTeamActivity,
-    rankedUsers: assignBadges(rankedUsers, days).map((u, i) => ({ ...u, rank: i + 1 })),
+    rankedUsers: assignBadges(rankedUsers, days).map((u, i) => ({
+      ...u,
+      rank: i + 1,
+      avatar_url: gravatarUrl(u.email),
+    })),
   };
 
   return {
