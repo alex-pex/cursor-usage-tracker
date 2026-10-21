@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getUserStats } from "@/lib/data";
+import { gravatarUrl } from "@/lib/gravatar";
 import { UserDetailClient } from "./user-detail-client";
 
 export const dynamic = "force-dynamic";
@@ -27,5 +28,11 @@ export default async function UserPage({ params }: PageProps) {
     );
   }
 
-  return <UserDetailClient email={decodedEmail} stats={stats} />;
+  return (
+    <UserDetailClient
+      email={decodedEmail}
+      stats={stats}
+      avatarUrl={gravatarUrl(decodedEmail, 96)}
+    />
+  );
 }

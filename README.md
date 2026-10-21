@@ -163,6 +163,8 @@ Also supports **email alerts** via [Resend](https://resend.com) (one API key, no
 | **Anomalies**      | Open incidents, MTTD/MTTI/MTTR metrics, full anomaly timeline                                                                                                                    |
 | **Settings**       | Detection thresholds, expensive model alerts, billing group management, HiBob CSV import, group export/import                                                                    |
 
+Member avatars come from [Gravatar](https://gravatar.com): the browser requests an image by the SHA-256 hash of each member's email.
+
 > For a detailed breakdown of every section, metric, badge, and chart, see [FEATURES.md](docs/FEATURES.md).
 
 ---

@@ -14,6 +14,7 @@ export interface RankedUser {
   rank: number;
   email: string;
   name: string;
+  avatar_url: string;
   spend_cents: number;
   included_spend_cents: number;
   fast_premium_requests: number;
