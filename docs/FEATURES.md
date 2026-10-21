@@ -156,3 +156,13 @@
 - Everyone else (members, unknown emails, anonymous) loses the features listed in `RESTRICTED_FEATURES`
 - Values: `insights`, `anomalies`, `anomalies.actions` (no Ack/Resolve), `user-details` (other members' pages greyed out and blocked), `settings`, `settings.actions` (read-only Settings); `*.actions` covers every `.actions` value
 - A value also restricts its dotted sub-values; the Overview is never restricted
+
+---
+
+## Header Menu
+
+**Who is viewing, shown left of the plan badge when signed in or when `RESTRICTED_FEATURES` is set.**
+
+- Gravatar avatar and name (Cursor full name for a Cursor member, else the sign-in email); the tooltip shows the email
+- Menu: My stats (Cursor members only, opens their user page) and Sign out
+- Shows _Anonymous_ when nobody is signed in (auth off)

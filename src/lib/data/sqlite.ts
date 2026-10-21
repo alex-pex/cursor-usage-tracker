@@ -2339,6 +2339,12 @@ export function getModelEfficiency(emails?: string[]): ModelEfficiency[] {
     .all(...params, ...params) as ModelEfficiency[];
 }
 
+export function findMember(email: string): { name: string; role: string } | undefined {
+  return getDb()
+    .prepare("SELECT name, role FROM members WHERE lower(email) = ? AND is_removed = 0")
+    .get(email.toLowerCase()) as { name: string; role: string } | undefined;
+}
+
 export function getAllMembers(): Array<TeamMember & { first_seen: string; last_seen: string }> {
   const db = getDb();
   return db.prepare("SELECT * FROM members ORDER BY name").all() as Array<
