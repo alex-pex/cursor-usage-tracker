@@ -31,7 +31,7 @@
 - Sortable by: spend, activity, requests, lines, $/req, context, name
 - Filterable by badge type via `Badges ▾` dropdown with collapsible sections and per-badge user counts
 - Active badge filter shown as chip with ✕ dismiss next to table header
-- Columns: rank, name, email, spend, requests, lines, $/req, model, profile badges, ranks
+- Columns: rank, name (with Gravatar avatar), email, spend, requests, lines, $/req, model, profile badges, ranks
 
 ### Badges (per user, all shown)
 
@@ -55,7 +55,7 @@
 
 ### Header
 
-- Name, email, role, billing group link
+- Gravatar avatar, name, email, role, billing group link
 - Profile badges (same as dashboard)
 
 ### KPI Cards
