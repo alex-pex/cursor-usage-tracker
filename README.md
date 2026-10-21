@@ -411,7 +411,7 @@ The import builds a `Group > Team` hierarchy automatically. Small teams (fewer t
 
 ## Authentication
 
-Authentication is **fully optional**. When no auth environment variables are set, the dashboard is open (the default behavior). Setting `AUTH_SECRET` enables Google OAuth sign-in.
+Authentication is **fully optional**. When no auth environment variables are set, the dashboard is open (the default behavior). Setting `AUTH_SECRET` enables Google OAuth sign-in, or another provider chosen with `AUTH_PROVIDER` (see [Alternative providers](#alternative-providers)).
 
 ### Setup
 
@@ -436,7 +436,22 @@ AUTH_ALLOWED_DOMAIN=yourcompany.com          # only @yourcompany.com emails
 AUTH_ALLOWED_EMAILS=admin@example.com,cto@example.com  # or specific emails
 ```
 
-When both are set, either match grants access. When neither is set, any Google account can sign in.
+When both are set, either match grants access. When neither is set, any account of the selected provider can sign in.
+
+### Alternative providers
+
+Google is the default. Set `AUTH_PROVIDER` to `microsoft-entra-id`, `github`, `gitlab`, `okta`, `keycloak` or `auth0` to use another one. `AUTH_SECRET`, `AUTH_TRUST_HOST`, `AUTH_URL` and the allowlists above work the same way. Credentials follow the Auth.js naming `AUTH_<PROVIDER>_ID`, `AUTH_<PROVIDER>_SECRET` and, where needed, `AUTH_<PROVIDER>_ISSUER` (provider name upper-cased, dashes as underscores). The redirect URI is `https://your-domain.com/api/auth/callback/<provider>`.
+
+Example with Microsoft Entra ID:
+
+```bash
+AUTH_PROVIDER=microsoft-entra-id
+AUTH_MICROSOFT_ENTRA_ID_ID=...
+AUTH_MICROSOFT_ENTRA_ID_SECRET=...
+AUTH_MICROSOFT_ENTRA_ID_ISSUER=https://login.microsoftonline.com/<tenant-id>/v2.0/  # required, limits sign-in to your tenant
+```
+
+The signed-in email is the `email` claim, or the user principal name (`preferred_username`) when absent. Accounts whose provider reports an unverified email are rejected, and GitHub emails must be verified.
 
 ### How It Works
 
