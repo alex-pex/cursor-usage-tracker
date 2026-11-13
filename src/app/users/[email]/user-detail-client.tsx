@@ -6,6 +6,7 @@ import { formatDateShort } from "@/lib/date-utils";
 import { shortModel } from "@/lib/format-utils";
 import { ExpandableCard } from "@/components/expandable-card";
 import { RoleBadge } from "@/components/access";
+import { Avatar } from "@/components/avatar";
 import type { Anomaly } from "@/lib/types";
 import type { UsageBadge, SpendBadge, ContextBadge, AdoptionBadge } from "@/lib/data";
 
@@ -108,6 +109,7 @@ interface UserStats {
 interface UserDetailClientProps {
   email: string;
   stats: UserStats;
+  avatarUrl: string;
 }
 
 function fmt(n: number): string {
@@ -190,7 +192,7 @@ const BADGE_STYLES: Record<string, { label: string; color: string; tooltip: stri
   },
 };
 
-export function UserDetailClient({ email, stats }: UserDetailClientProps) {
+export function UserDetailClient({ email, stats, avatarUrl }: UserDetailClientProps) {
   const currentSpend = stats.spending[0];
   const activityDays = stats.dailyActivity.length;
   const totalAgentRequests = stats.dailyActivity.reduce((sum, d) => sum + d.agent_requests, 0);
@@ -227,6 +229,7 @@ export function UserDetailClient({ email, stats }: UserDetailClientProps) {
         <Link href="/" className="text-xs text-zinc-500 hover:text-zinc-300">
           ← Back
         </Link>
+        <Avatar src={avatarUrl} size={40} />
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-lg font-bold">{stats.member?.name ?? email}</h1>

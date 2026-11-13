@@ -1,6 +1,7 @@
 "use client";
 
 import { UserLink } from "@/components/access";
+import { Avatar } from "@/components/avatar";
 import { useState, useRef, useEffect } from "react";
 import type { RankedUser, UsageBadge, SpendBadge, ContextBadge, AdoptionBadge } from "@/lib/data";
 import type { SortColumn } from "@/app/dashboard-client";
@@ -441,7 +442,11 @@ export function MembersTable({
                       : rankBadge(row.spend_rank)}
                   </td>
                   <td className="px-4 py-2.5 font-medium whitespace-nowrap">
-                    <UserLink email={row.email} className="hover:text-blue-300 transition-colors">
+                    <UserLink
+                      email={row.email}
+                      className="flex items-center gap-2 hover:text-blue-300 transition-colors"
+                    >
+                      <Avatar src={row.avatar_url} size={20} />
                       {row.name}
                     </UserLink>
                   </td>
